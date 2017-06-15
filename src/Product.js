@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import style from './style';
-import marked from 'marked';
 
 class Product extends Component {
   constructor(props) {
