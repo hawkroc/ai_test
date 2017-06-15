@@ -35,8 +35,9 @@ router.route('/product')
   //get all products 
   .get((req, res)=> {
     Product.find((err, products) => {
-      if (err)
-        res.send(err);
+    if (err) {
+        return res.send(err);
+    }  
       res.json(products)
     });
   })
@@ -47,9 +48,13 @@ router.route('/product')
     (req.body.text) ? product.text = req.body.text : null;
 
     product.save((err) =>{
-      if (err)
-        res.send(err);
-      res.json({ message: 'product successfully added!' });
+    if (err) {
+        return res.send(err);
+    }
+
+     // res.set("id", product["_id"]);
+      res.json(product);
+     // res.json({ message: 'product successfully added!' });
     });
   });
 
@@ -62,9 +67,9 @@ router.route('/search/:keyword')
    
     //"name" : { $regex: /Ghost/, $options: 'i' }
     Product.find({ "name" :{ $regex: keyword, $options: 'i' }},(err, products)=> {
-      if (err)
-        res.send(err);
-
+    if (err) {
+        return res.send(err);
+    }
       res.json(products)
     });
   });
@@ -72,16 +77,18 @@ router.route('/search/:keyword')
 router.route('/product/:product_id')
   .put((req, res) =>{
     Product.findById(req.params.product_id, (err, product)=> {
-      if (err)
-        res.send(err);
+    if (err) {
+        return res.send(err);
+    }    
       //setting the new products
       (req.body.name) ? product.name = req.body.name : null;
       (req.body.text) ? product.text = req.body.text : null;
       //save 
       product.save((err)=> {
-        if (err)
-          res.send(err);
-        res.json({ message: 'product has been updated' });
+      if (err) {
+        return res.send(err);
+    }  
+        res.json(product);
       });
     });
   })
@@ -89,8 +96,12 @@ router.route('/product/:product_id')
   .delete((req, res)=> {
 
     Product.remove({ _id: req.params.product_id }, (err, product) =>{
-      if (err)
-        res.send(err);
+     
+ if (err) {
+  console.log(''+err);
+        return res.send(err);
+    }
+
       res.json({ message: 'product has been deleted' })
     })
   });

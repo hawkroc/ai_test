@@ -28,7 +28,9 @@ class Product extends Component {
   };
   deleteProduct=(e)=> {
     e.preventDefault();
+
     let id=this.props.uniqueID;
+    console.log('id2--'+id);
     this.props.onProductDelete(id,this.props.index);
   };
   handlePriceChange=(e)=> {

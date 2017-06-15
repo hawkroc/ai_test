@@ -23,7 +23,7 @@ class ProductBox extends Component {
   searchProducts=(keyword)=> {
     //let name=keyword.name;
  let url= `${search}/${keyword.name}`;
- console.log(""+url);
+ //console.log(""+url);
     axios.get(url)
       .then(res => {
         this.setState({ data: res.data });
@@ -31,43 +31,59 @@ class ProductBox extends Component {
   };
 
   handleProductSubmit=(product)=> {
-    let products = this.state.data;
-    product.id = Date.now();
-    let newProduct = products.concat([product]);
-    this.setState({ data: newProduct });
+ let products = this.state.data;
+
     axios.post(apiUrl, product)
-      .catch(err => {
+    .then(res => {
+      product =res.data;
+          console.log('product    '+JSON.stringify(product));  
+           let newProduct = products.concat([product]);
+
+    this.setState({ data: newProduct });
+      })
+    .catch(err => {
         console.error(err);
-        this.setState({ data: products });
+       
       });
+
+      
+   // product.id = Date.now();
+  
   };
   handleProductDelete=(id,index)=> {
     if(!id){
       return;
     }
-       let products = this.state.data;
-        products.splice(index,1);
-        this.setState({ data: products });
+       
     axios.delete(`${apiUrl}/${id}`)
       .then(res => {
-        console.log('Products deleted');
+      //  console.log('Products deleted   '+`${apiUrl}/${id}`);  
       })
-      .catch(err => {
+      .catch(err => {          
         console.error(err);
       });
+     let products = this.state.data;
+        products.splice(index,1);
+        this.setState({ data: products });
+
   };
   handleProductUpdate=(id, product,index)=> {
-      let products = this.state.data;
+    axios.put(`${apiUrl}/${id}`, product)
+
+ .then(res => {
+      product =res.data;
+       let products = this.state.data;
         products[index]=product;
         this.setState({ data: products });
-    axios.put(`${apiUrl}/${id}`, product)
+      })
       .catch(err => {
         console.log(err);
-      })
+      });
+
+     
   };
   componentDidMount=()=> {
     this.loadProducts();
-   //setInterval(this.loadProducts, this.props.pollInterval);
   };
   render() {
     return (
