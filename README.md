@@ -2,7 +2,7 @@
 ## Start
 *  make sure you installed MongoDB and make  MongoDB running
 *  run the script make frontend and backend started
-`npm run start-all`
+*  `npm run start-all`
 
 ## Frontend:
 * React
