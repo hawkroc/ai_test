@@ -42,6 +42,9 @@ class ProductBox extends Component {
       });
   };
   handleProductDelete=(id,index)=> {
+    if(!id){
+      return;
+    }
        let products = this.state.data;
         products.splice(index,1);
         this.setState({ data: products });
