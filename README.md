@@ -1,4 +1,4 @@
-### This test for centrality.ai by Peng
+### This  little app for mongodb+react by Peng
 ## Start
 *  make sure you installed MongoDB and make  MongoDB running
 *  You can change the MongoDB url in `server.js`
