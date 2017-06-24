@@ -1,13 +1,13 @@
 //server.js
 'use strict'
-var express = require('express');
-var mongoose = require('mongoose');
-var bodyParser = require('body-parser');
-var  Product = require('./model/products');
-var app = express();
-var router = express.Router();
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+const  Product = require('./model/products');
+const app = express();
+const router = express.Router();
 
-var port = 3001;
+const port = 3001;
 
 //mongoose.connect('mongodb://<DBUSERNAME>:<DBPASSWORD>@ds019836.mlab.com:19836/bryandb');
 //mongoose.connect('mongodb://testMongodb:test@ds123312.mlab.com:23312/ai_test');
